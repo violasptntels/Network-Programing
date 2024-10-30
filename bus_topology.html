@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulasi Topology Bus</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #eae0c8;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        width: 600px; /* Lebar diperbesar */
+        padding: 20px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #9b8972;
+      }
+      h1 {
+        text-align: center;
+        color: white;
+        background-color: #9b8972;
+        margin: -20px -20px 20px -20px;
+        padding: 10px;
+        border-radius: 12px 12px 0 0;
+        font-size: 24px;
+      }
+      .form-group {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      label {
+        width: 40%; /* Lebar label diatur */
+        font-size: 14px;
+        margin-right: 10px;
+      }
+      select,
+      input[type="text"] {
+        width: 60%; /* Lebar input diatur */
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      button {
+        background-color: #9b8972;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #8b7a5d;
+      }
+      #output {
+        margin-top: 15px;
+        background-color: #f4efe5;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #9b8972;
+        height: 120px; /* Membatasi tinggi output */
+        overflow-y: auto;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Simulasi Topology Bus</h1>
+      <div id="statusInputs">
+        <div class="form-group">
+          <label for="comp1">Status Komputer 1:</label>
+          <select id="comp1">
+            <option value="aktif">Aktif</option>
+            <option value="rusak">Rusak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="comp2">Status Komputer 2:</label>
+          <select id="comp2">
+            <option value="aktif">Aktif</option>
+            <option value="rusak">Rusak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="comp3">Status Komputer 3:</label>
+          <select id="comp3">
+            <option value="aktif">Aktif</option>
+            <option value="rusak">Rusak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="comp4">Status Komputer 4:</label>
+          <select id="comp4">
+            <option value="aktif">Aktif</option>
+            <option value="rusak">Rusak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="comp5">Status Komputer 5:</label>
+          <select id="comp5">
+            <option value="aktif">Aktif</option>
+            <option value="rusak">Rusak</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Pesan dari Komputer 1:</label>
+        <input type="text" id="message" placeholder="Tulis pesan di sini..." />
+      </div>
+
+      <button onclick="sendMessage()">Kirim Pesan</button>
+
+      <div id="output"></div>
+    </div>
+
+    <script>
+      function sendMessage() {
+        const status = [
+          document.getElementById("comp1").value,
+          document.getElementById("comp2").value,
+          document.getElementById("comp3").value,
+          document.getElementById("comp4").value,
+          document.getElementById("comp5").value,
+        ];
+
+        const message = document.getElementById("message").value;
+        let currentComp = 0;
+        let outputText = `Pesan dari Komputer 1: "${message}"<br>`;
+
+        while (currentComp < 5) {
+          if (status[currentComp] === "aktif") {
+            outputText += `Pesan dikirim ke Komputer ${
+              currentComp + 1
+            } dan diterima.<br>`;
+            currentComp++;
+          } else {
+            outputText += `Pesan tidak terkirim, berhenti di Komputer ${
+              currentComp + 1
+            }.<br>`;
+            break;
+          }
+        }
+
+        const outputDiv = document.getElementById("output");
+        outputDiv.innerHTML = outputText;
+        outputDiv.style.display = "block";
+      }
+    </script>
+  </body>
+</html>
